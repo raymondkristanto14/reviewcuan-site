@@ -244,32 +244,30 @@
   }
   .hero-note { margin-top: 22px; font-size: 13px; color: var(--text-dim); }
 
-  /* HERO VISUAL — cascade diagonal kanan-atas ke kiri-bawah, seperti referensi */
+  /* HERO VISUAL — 2 foto kartu (besar & sedang), simetris terhadap headline, border liquid glass ala akrilik */
   .hero-visual { position: relative; height: 460px; width: 380px; justify-self: center; }
   @media (max-width: 900px) { .hero-visual { justify-self: center; margin: 0 auto; } }
-  .float-card { position: absolute; border-radius: 20px; padding: 20px; }
-  .float-card.card-back { width: 210px; right: -10px; top: -10px; transform: rotate(10deg); opacity: 0.9; animation: floatBob 6s ease-in-out infinite; }
-  .float-card.card-mid { width: 215px; right: 70px; top: 110px; transform: rotate(-5deg); background: linear-gradient(160deg, #0e2417, #0a0a0f 65%); animation: floatBob 7s ease-in-out infinite 0.6s; }
-  .float-card.card-front { width: 270px; left: -10px; top: 235px; transform: rotate(-9deg); animation: floatBob 6.5s ease-in-out infinite 1.2s; }
-  @keyframes floatBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
-  .float-card .fc-label { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
-  .fc-qr {
-    width: 100%; aspect-ratio: 1; border-radius: 12px;
-    background: repeating-conic-gradient(#0d0d12 0% 25%, transparent 0% 50%) 0 0/10px 10px, #f5f5f7;
-    margin-bottom: 12px; position: relative;
+
+  .review-card {
+    position: absolute;
+    border-radius: 26px;
+    padding: 7px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.18));
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: 0 24px 50px -14px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.5), inset 0 -1px 8px rgba(0,0,0,0.18);
   }
-  .fc-qr::after { content: ""; position: absolute; inset: 30%; background: var(--bg); border-radius: 4px; }
-  .fc-brand { font-weight: 800; font-size: 14px; }
-  .fc-brand span { color: var(--accent-3); }
-  .fc-stat-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; }
-  .fc-stat-num { font-size: 24px; font-weight: 800; color: var(--accent-3); }
-  .fc-stat-sub { font-size: 11px; color: var(--text-dim); }
-  .fc-progress { height: 6px; border-radius: 999px; background: rgba(255,255,255,0.08); margin-top: 12px; overflow: hidden; }
-  .fc-progress-fill { height: 100%; width: 72%; border-radius: 999px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
-  .fc-avatars { display: flex; margin-top: 14px; }
-  .fc-avatar { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--bg-soft); margin-left: -8px; background: linear-gradient(135deg, var(--accent-2), #16a34a); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; }
-  .fc-avatar:first-child { margin-left: 0; }
-  .fc-check { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--accent-3); margin-top: 10px; }
+  .review-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  .review-card.card-lg { width: 260px; height: 260px; right: 4px; top: 34px; transform: rotate(6deg); animation: floatBob 6.5s ease-in-out infinite; }
+  .review-card.card-md { width: 185px; height: 185px; left: 0; bottom: 26px; transform: rotate(-8deg); animation: floatBob 7.5s ease-in-out infinite 0.8s; z-index: 2; }
+  @keyframes floatBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
 
   section { padding: 88px 0; position: relative; }
   .section-label { text-align: center; color: var(--accent-3); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
@@ -474,11 +472,8 @@
 
     .hero { padding: 40px 0 48px; }
     .hero-visual { width: 300px; height: 365px; margin-top: 36px; }
-    .float-card { padding: 16px; }
-    .float-card.card-back { width: 165px; right: -6px; top: -6px; }
-    .float-card.card-mid { width: 168px; right: 50px; top: 86px; }
-    .float-card.card-front { width: 210px; left: -6px; top: 182px; }
-    .fc-stat-num { font-size: 21px; }
+    .review-card.card-lg { width: 205px; height: 205px; right: 3px; top: 27px; }
+    .review-card.card-md { width: 146px; height: 146px; left: 0; bottom: 20px; }
 
     .products-grid { gap: 20px; }
     .product-card { padding: 26px 22px; border-radius: 20px; }
@@ -501,11 +496,8 @@
 
   @media (max-width: 400px) {
     .hero-visual { width: 260px; height: 320px; }
-    .float-card.card-back { width: 145px; right: -4px; top: -4px; }
-    .float-card.card-mid { width: 148px; right: 40px; top: 76px; }
-    .float-card.card-front { width: 185px; left: -4px; top: 160px; }
-    .fc-label { font-size: 10px; }
-    .fc-stat-num { font-size: 18px; }
+    .review-card.card-lg { width: 178px; height: 178px; right: 3px; top: 23px; }
+    .review-card.card-md { width: 127px; height: 127px; left: 0; bottom: 18px; }
   }
 </style>
 </head>
@@ -558,36 +550,11 @@
     </div>
 
     <div class="hero-visual intro-5">
-      <div class="float-card card-back glass">
-        <div class="fc-label">Ringkasan Bulan Ini</div>
-        <div class="fc-stat-row">
-          <span class="fc-stat-num">27</span>
-          <span class="fc-stat-sub">kartu closing</span>
-        </div>
-        <div class="fc-progress"><div class="fc-progress-fill"></div></div>
-        <div class="fc-stat-sub" style="margin-top:8px;">Target bulanan 72%</div>
+      <div class="review-card card-lg">
+        <img src="review-card.jpg" alt="Kartu NFC/QR Google Review ReviewCuan" loading="eager" />
       </div>
-
-      <div class="float-card card-mid glass">
-        <div class="fc-label">Closing Masuk</div>
-        <div class="fc-stat-row">
-          <span class="fc-stat-num" style="font-size:26px;">Rp75.000</span>
-        </div>
-        <div class="fc-stat-sub">Barbershop Jaya — kartu #12</div>
-        <div class="fc-check">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-          Pembayaran dikonfirmasi
-        </div>
-      </div>
-
-      <div class="float-card card-front glass">
-        <div class="fc-qr"></div>
-        <div class="fc-brand">Review<span>Cuan</span> Card</div>
-        <div class="fc-avatars">
-          <div class="fc-avatar">B</div>
-          <div class="fc-avatar">R</div>
-          <div class="fc-avatar">+</div>
-        </div>
+      <div class="review-card card-md">
+        <img src="review-card.jpg" alt="Kartu NFC/QR Google Review ReviewCuan" loading="eager" />
       </div>
     </div>
   </div>
