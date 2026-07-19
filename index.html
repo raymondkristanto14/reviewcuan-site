@@ -276,7 +276,7 @@
   .section-title { text-align: center; font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 20px; }
   .section-sub { text-align: center; color: var(--text-dim); max-width: 560px; margin: 0 auto 48px; font-size: 15.5px; }
 
-  /* ===== PRODUCTS — tier 1 di atas, tier 2 di bawah; tiap kartu: media kiri (1:1, nggak kepotong) + konten kanan, dibuat compact biar 2-2nya kelihatan tanpa banyak scroll ===== */
+  /* ===== PRODUCTS — mobile: tier 1 di atas, tier 2 di bawah (nggak diubah). Desktop: tier 1 & 2 bersebelahan kiri-kanan. Tiap kartu: media kiri (1:1, nggak kepotong) + konten kanan ===== */
   #produk { padding-top: 60px; }
   .products-grid {
     display: grid;
@@ -286,6 +286,7 @@
     margin: 0 auto;
     align-items: stretch;
   }
+  @media (min-width: 761px) { .products-grid { grid-template-columns: repeat(2, 1fr); max-width: 960px; } }
   .product-card {
     border-radius: 20px;
     position: relative;
@@ -401,6 +402,10 @@
     color: var(--text);
     border: 1px solid var(--card-border);
   }
+  /* bullet fitur di bawah CTA — ngisi ruang kosong di kolom kanan supaya nggak keliatan bolong */
+  .product-features { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .product-features li { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--text-dim); }
+  .product-features li .check { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-3); display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 800; }
   .unit-note { text-align: center; margin-top: 40px; font-size: 14px; color: var(--text-dim); }
   .unit-note strong { color: var(--accent-3); }
 
@@ -650,6 +655,11 @@
           </div>
           <div class="price-terms">Sekali bayar · Akses instan</div>
           <a href="#" class="buy-btn" data-lynk-tier="supplier">Ambil Sekarang</a>
+          <ul class="product-features">
+            <li><span class="check">✓</span> Supplier terpercaya, langsung dari tangan pertama</li>
+            <li><span class="check">✓</span> Harga cuma Rp15.000/pcs</li>
+            <li><span class="check">✓</span> Tanpa minimum order</li>
+          </ul>
         </div>
       </div>
 
@@ -671,6 +681,11 @@
           </div>
           <div class="price-terms">Sekali bayar · Akses instan · Berlaku selamanya</div>
           <a href="#" class="buy-btn" data-lynk-tier="guide">Ambil Sekarang</a>
+          <ul class="product-features">
+            <li><span class="check">✓</span> Script closing siap pakai</li>
+            <li><span class="check">✓</span> Strategi deketin bisnis lokal</li>
+            <li><span class="check">✓</span> Update materi gratis selamanya</li>
+          </ul>
         </div>
       </div>
 
