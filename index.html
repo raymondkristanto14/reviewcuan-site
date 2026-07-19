@@ -316,6 +316,15 @@
     border-right: 1px solid var(--card-border);
   }
   @media (max-width: 640px) { .product-media { flex: 0 0 auto; width: 100%; min-height: 150px; border-right: none; border-bottom: 1px solid var(--card-border); } }
+  .product-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    position: relative;
+    z-index: 1;
+  }
   .product-media-placeholder {
     border: 1.5px dashed var(--card-border);
     border-radius: 14px;
@@ -635,7 +644,7 @@
 
       <div class="product-card glass">
         <div class="product-media">
-          <div class="product-media-placeholder">Foto/visual produk<br />(Akses Supplier)</div>
+          <img src="tier1-thumb.jpg" alt="Akses Supplier Eksklusif kartu NFC Google Review" loading="lazy" />
         </div>
         <div class="product-body">
           <div class="product-name">AKSES SUPPLIER EKSKLUSIF</div>
