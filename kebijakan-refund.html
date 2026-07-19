@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kebijakan Refund — ReviewCuan</title>
+<meta name="description" content="Kebijakan refund produk digital ReviewCuan: kapan refund bisa diajukan, kapan tidak berlaku, dan cara mengajukannya." />
+<style>
+  :root {
+    --bg: #060608; --card: rgba(255,255,255,0.035); --card-border: rgba(255,255,255,0.09);
+    --text: #f5f5f7; --text-dim: #a1a1aa; --accent: #22c55e; --accent-2: #4ade80; --accent-3: #86efac;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.01em; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    position: relative; overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .orb { position: fixed; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none; }
+  .orb-1 { width: 480px; height: 480px; top: -180px; left: -140px; background: radial-gradient(circle, rgba(34,197,94,0.3), transparent 70%); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(6,6,8,0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+  .logo span { color: var(--accent); }
+  .back-link { font-size: 14px; color: var(--text-dim); display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s ease; }
+  .back-link:hover { color: var(--text); }
+  .back-link svg { width: 15px; height: 15px; }
+
+  .legal-hero { padding: 56px 0 20px; position: relative; z-index: 1; }
+  .legal-hero .eyebrow { color: var(--accent-3); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .legal-hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px; }
+  .legal-hero .updated { color: var(--text-dim); font-size: 14px; }
+
+  .legal-content { padding: 20px 0 80px; position: relative; z-index: 1; }
+  .legal-content h2 { font-size: 19px; font-weight: 800; margin: 34px 0 12px; letter-spacing: -0.01em; }
+  .legal-content h2:first-of-type { margin-top: 0; }
+  .legal-content p { color: var(--text-dim); margin: 0 0 16px; font-size: 15px; }
+  .legal-content ul { color: var(--text-dim); font-size: 15px; padding-left: 20px; margin: 0 0 16px; }
+  .legal-content li { margin-bottom: 8px; }
+  .legal-content strong { color: var(--text); }
+
+  .refund-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-radius: var(--radius); padding: 22px 26px; margin-bottom: 18px;
+  }
+  .refund-card.yes { border-color: rgba(74,222,128,0.35); }
+  .refund-card.no { border-color: rgba(248,113,113,0.3); }
+  .refund-card .refund-label { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; margin-bottom: 12px; }
+  .refund-card.yes .refund-label { color: var(--accent-3); }
+  .refund-card.no .refund-label { color: #fca5a5; }
+  .refund-card ul { margin-bottom: 0; }
+
+  footer { border-top: 1px solid var(--card-border); padding: 40px 0 32px; text-align: center; color: var(--text-dim); font-size: 13px; position: relative; z-index: 1; }
+  footer .footer-logo { font-weight: 800; color: var(--text); margin-bottom: 10px; font-size: 16px; }
+  footer .footer-links { display: flex; gap: 20px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+  footer .footer-links a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    .nav-inner { padding: 12px 20px; }
+    .legal-hero { padding: 40px 0 16px; }
+    .refund-card { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Review<span>Cuan</span></a>
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Kembali ke Beranda
+    </a>
+  </div>
+</nav>
+
+<section class="legal-hero">
+  <div class="wrap">
+    <div class="eyebrow">Legal</div>
+    <h1>Kebijakan Refund</h1>
+    <div class="updated">Terakhir diperbarui: 19 Juli 2026</div>
+  </div>
+</section>
+
+<section class="legal-content">
+  <div class="wrap">
+
+    <p>Akses Supplier Eksklusif dan Panduan Lengkap A-Z adalah produk digital yang dikirim secara instan setelah pembayaran berhasil. Karena sifatnya yang instan, berlaku ketentuan refund berikut.</p>
+
+    <h2>1. Kapan Refund Bisa Diajukan</h2>
+    <div class="refund-card yes">
+      <div class="refund-label">✓ Refund berlaku untuk kondisi ini</div>
+      <ul>
+        <li>Pembayaran berhasil tapi kamu tidak menerima akses/link produk dalam 1x24 jam</li>
+        <li>Link atau materi yang diterima rusak, tidak bisa dibuka, atau tidak sesuai dengan produk yang dibeli</li>
+        <li>Kamu tidak sengaja melakukan pembayaran ganda (dobel) untuk produk yang sama</li>
+      </ul>
+    </div>
+    <p>Ajukan klaim refund untuk kondisi di atas maksimal <strong>3x24 jam</strong> setelah transaksi, dengan menyertakan bukti pembayaran dari Lynk.id.</p>
+
+    <h2>2. Kapan Refund Tidak Berlaku</h2>
+    <div class="refund-card no">
+      <div class="refund-label">✕ Refund tidak berlaku untuk kondisi ini</div>
+      <ul>
+        <li>Kamu sudah membuka/mengakses materi panduan — produk digital tidak bisa "dikembalikan" setelah diakses</li>
+        <li>Alasan "berubah pikiran" setelah materi diterima</li>
+        <li>Hasil closing/cuan yang kamu dapatkan tidak sesuai ekspektasi pribadi — hasil bergantung pada eksekusi masing-masing, bukan kesalahan produk (lihat disclaimer di <a href="syarat-ketentuan.html" style="color:#fca5a5; text-decoration: underline;">Syarat &amp; Ketentuan</a>)</li>
+        <li>Kesalahan input data (misalnya email salah) dari pihak pembeli sendiri</li>
+      </ul>
+    </div>
+
+    <h2>3. Cara Mengajukan Refund</h2>
+    <p>Hubungi kami lewat halaman <a href="kontak.html" style="color:var(--accent-3); text-decoration: underline;">Kontak</a> atau email, dengan menyertakan:</p>
+    <ul>
+      <li>Nama dan email yang digunakan saat checkout</li>
+      <li>Bukti pembayaran dari Lynk.id</li>
+      <li>Alasan pengajuan refund</li>
+    </ul>
+    <p>Tim kami akan meninjau pengajuan dalam <strong>1–3 hari kerja</strong>.</p>
+
+    <h2>4. Proses Pengembalian Dana</h2>
+    <p>Jika refund disetujui, dana dikembalikan lewat metode yang sama dengan pembayaran, melalui sistem Lynk.id, dalam waktu maksimal <strong>7 hari kerja</strong> sejak persetujuan.</p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-logo">Review<span style="color:var(--accent)">Cuan</span></div>
+    <div class="footer-links">
+      <a href="kebijakan-privasi.html">Kebijakan Privasi</a>
+      <a href="syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
+      <a href="kebijakan-refund.html">Kebijakan Refund</a>
+      <a href="kontak.html">Kontak</a>
+    </div>
+    <div>© 2026 ReviewCuan. Seluruh hak cipta dilindungi.</div>
+  </div>
+</footer>
+
+</body>
+</html>
