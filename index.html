@@ -402,10 +402,11 @@
     color: var(--text);
     border: 1px solid var(--card-border);
   }
-  /* bullet fitur di bawah CTA — ngisi ruang kosong di kolom kanan supaya nggak keliatan bolong */
-  .product-features { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  /* bullet fitur di bawah CTA — cuma tampil di desktop (layout mobile sengaja nggak disentuh) buat ngisi ruang kosong di kolom kanan */
+  .product-features { display: none; list-style: none; margin: 12px 0 0; padding: 0; flex-direction: column; gap: 6px; }
   .product-features li { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--text-dim); }
   .product-features li .check { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-3); display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 800; }
+  @media (min-width: 761px) { .product-features { display: flex; } }
   .unit-note { text-align: center; margin-top: 40px; font-size: 14px; color: var(--text-dim); }
   .unit-note strong { color: var(--accent-3); }
 
