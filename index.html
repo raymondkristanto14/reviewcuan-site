@@ -276,24 +276,27 @@
   .section-title { text-align: center; font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 20px; }
   .section-sub { text-align: center; color: var(--text-dim); max-width: 560px; margin: 0 auto 48px; font-size: 15.5px; }
 
-  /* ===== PRODUCTS — media di atas (full width, 1:1, nggak kepotong) + konten di bawah, tier 1 & tier 2 ditumpuk vertikal ===== */
+  /* ===== PRODUCTS — media kiri (1:1, nggak kepotong) + konten & CTA kanan, tier 1 & 2 sejajar biar nggak perlu scroll ===== */
   #produk { padding-top: 60px; }
   .products-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    max-width: 480px;
+    max-width: 960px;
     margin: 0 auto;
     align-items: stretch;
   }
+  @media (max-width: 760px) { .products-grid { grid-template-columns: 1fr; max-width: 480px; } }
   .product-card {
     border-radius: 22px;
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  @media (max-width: 560px) { .product-card { flex-direction: column; } }
   .product-card:hover { transform: translateY(-6px); }
   .product-card.popular {
     border: 1px solid rgba(74,222,128,0.5);
@@ -301,19 +304,22 @@
   }
   .product-card.popular:hover { transform: translateY(-10px); }
 
+  /* media: lebar tetap + aspect-ratio 1:1, TIDAK ikut stretch ke tinggi card supaya gambar persegi utuh, nggak kepotong */
   .product-media {
     position: relative;
-    width: 100%;
+    flex: 0 0 42%;
+    width: 42%;
     aspect-ratio: 1 / 1;
+    align-self: flex-start;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     background: linear-gradient(165deg, rgba(74,222,128,0.14), rgba(255,255,255,0.015) 60%);
-    border-bottom: 1px solid var(--card-border);
+    border-right: 1px solid var(--card-border);
     overflow: hidden;
-    flex-shrink: 0;
   }
+  @media (max-width: 560px) { .product-media { flex: 0 0 auto; width: 100%; align-self: stretch; border-right: none; border-bottom: 1px solid var(--card-border); } }
   .product-media img {
     display: block;
     width: 100%;
@@ -330,8 +336,8 @@
     line-height: 1.4;
     color: var(--text-dim);
     text-align: center;
-    width: calc(100% - 36px);
-    margin: 18px;
+    width: calc(100% - 24px);
+    margin: 12px;
   }
 
   .badge-popular {
