@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kontak — TernakCuan</title>
-<meta name="description" content="Ada pertanyaan sebelum atau sesudah beli produk TernakCuan? Tinggalkan email kamu, kami akan hubungi balik." />
+<meta name="description" content="Ada pertanyaan atau kendala sebelum/sesudah beli produk TernakCuan? Isi form kontak di bawah, tim kami akan hubungi balik." />
 <style>
   :root {
     --bg: #060608; --card: rgba(255,255,255,0.035); --card-border: rgba(255,255,255,0.09);
@@ -36,7 +36,7 @@
   .legal-hero { padding: 56px 0 40px; position: relative; z-index: 1; text-align: center; }
   .legal-hero .eyebrow { color: var(--accent-3); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
   .legal-hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px; }
-  .legal-hero p { color: var(--text-dim); font-size: 15.5px; max-width: 440px; margin: 0 auto; }
+  .legal-hero p { color: var(--text-dim); font-size: 15.5px; max-width: 460px; margin: 0 auto; }
 
   .contact-section { padding: 0 0 90px; position: relative; z-index: 1; }
 
@@ -47,16 +47,16 @@
     border-radius: 22px;
   }
 
-  .contact-form-card { padding: 36px; text-align: center; }
-  .contact-form { display: flex; flex-direction: column; gap: 14px; }
-  .form-row { text-align: left; }
+  .contact-form-card { padding: 36px; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
   .form-row label { display: block; font-size: 13px; font-weight: 700; color: var(--text-dim); margin-bottom: 7px; }
-  .form-row input {
+  .form-row input, .form-row textarea {
     width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--card-border);
-    border-radius: 12px; padding: 13px 14px; color: var(--text); font-family: inherit;
+    border-radius: 12px; padding: 12px 14px; color: var(--text); font-family: inherit;
     font-size: 14.5px; transition: border-color 0.2s ease;
   }
-  .form-row input:focus { outline: none; border-color: rgba(74,222,128,0.5); }
+  .form-row input:focus, .form-row textarea:focus { outline: none; border-color: rgba(74,222,128,0.5); }
+  .form-row textarea { min-height: 130px; resize: vertical; }
   .contact-submit {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     background: linear-gradient(135deg, var(--accent-2), var(--accent), #16a34a);
@@ -68,17 +68,17 @@
   .contact-submit svg { width: 16px; height: 16px; }
   @keyframes btnGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-  .response-time {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 22px; padding: 9px 16px;
-    border: 1px dashed var(--card-border); border-radius: 999px;
-    font-size: 12.5px; color: var(--text-dim);
-  }
-  .response-time svg { width: 15px; height: 15px; color: var(--accent-3); flex-shrink: 0; }
-  .response-time strong { color: var(--text); font-weight: 700; }
-
-  .form-success { display: none; font-size: 14px; color: var(--accent-3); font-weight: 600; }
+  .form-success { display: none; text-align: center; font-size: 14px; color: var(--accent-3); font-weight: 600; }
   .form-success.show { display: block; }
+
+  .response-time {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 24px; padding: 14px 16px;
+    border: 1px dashed var(--card-border); border-radius: 14px;
+    font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  }
+  .response-time svg { width: 16px; height: 16px; color: var(--accent-3); flex-shrink: 0; margin-top: 2px; }
+  .response-time strong { color: var(--text); font-weight: 700; }
 
   footer { border-top: 1px solid var(--card-border); padding: 40px 0 32px; text-align: center; color: var(--text-dim); font-size: 13px; position: relative; z-index: 1; }
   footer .footer-logo { font-weight: 800; color: var(--text); margin-bottom: 10px; font-size: 16px; }
@@ -112,7 +112,7 @@
   <div class="wrap">
     <div class="eyebrow">Kontak</div>
     <h1>Ada Pertanyaan? Kabarin Kami</h1>
-    <p>Tinggalkan email kamu, tim kami yang akan hubungi balik.</p>
+    <p>Sebelum beli, sesudah beli, atau ada kendala teknis — isi form di bawah, tim kami yang akan hubungi balik.</p>
   </div>
 </section>
 
@@ -121,19 +121,33 @@
     <div class="contact-form-card glass">
       <form class="contact-form" id="contactForm">
         <div class="form-row">
-          <label for="cf-email">Email kamu</label>
+          <label for="cf-name">Nama</label>
+          <input type="text" id="cf-name" name="name" placeholder="Nama kamu" required />
+        </div>
+        <div class="form-row">
+          <label for="cf-email">Email</label>
           <input type="email" id="cf-email" name="email" placeholder="email@kamu.com" required />
         </div>
+        <div class="form-row">
+          <label for="cf-subject">Topik</label>
+          <input type="text" id="cf-subject" name="subject" placeholder="Contoh: Belum terima akses / Tanya sebelum beli" required />
+        </div>
+        <div class="form-row">
+          <label for="cf-message">Pesan</label>
+          <textarea id="cf-message" name="message" placeholder="Tulis pertanyaan atau kendala kamu di sini..." required></textarea>
+        </div>
         <button type="submit" class="contact-submit">
-          Kirim
+          Kirim Pesan
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <div class="form-success" id="formSuccess">Terima kasih! Email kamu sudah kami terima.</div>
+        <div class="form-success" id="formSuccess">Terima kasih! Pesan kamu sudah kami terima.</div>
       </form>
 
       <div class="response-time">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        Waktu respon: <strong>1×24 jam</strong> pada hari kerja
+        <div>
+          <strong>Waktu respon: 1×24 jam</strong> pada hari kerja — Senin s/d Jumat, pukul 09.00–18.00 WIB. Pesan yang masuk di luar jam tersebut (termasuk akhir pekan/hari libur) akan dibalas di hari kerja berikutnya.
+        </div>
       </div>
     </div>
   </div>
@@ -154,12 +168,12 @@
 
 <script>
   // ==== GANTI DENGAN ALAMAT EMAIL TUJUAN SETELAH SIAP ====
-  // Form ini cuma mengumpulkan alamat email pengunjung (bukan form pesan
-  // lengkap). Situs ini statis tanpa server, jadi submit akan membuka
-  // aplikasi email dengan email pengunjung sudah tercantum di isi pesan,
-  // ditujukan ke alamat di bawah. Kalau nanti mau submission masuk otomatis
-  // ke dashboard/Google Sheet tanpa buka email manual, form ini bisa
-  // disambungkan ke layanan seperti Formspree atau Google Form.
+  // Form kontak ini belum terhubung ke backend/database (situs statis tanpa
+  // server). Saat submit, browser akan membuka aplikasi email default dengan
+  // isi form yang sudah terisi otomatis, ditujukan ke alamat di bawah. Kalau
+  // nanti mau pesan masuk otomatis ke dashboard/Google Sheet tanpa buka email
+  // manual, form ini bisa disambungkan ke layanan seperti Formspree atau
+  // Google Form.
   const CONTACT_DESTINATION_EMAIL = "GANTI-DENGAN-EMAIL-TUJUAN@domain.com";
 
   const form = document.getElementById("contactForm");
@@ -167,11 +181,14 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    const visitorEmail = document.getElementById("cf-email").value;
+    const name = document.getElementById("cf-name").value;
+    const email = document.getElementById("cf-email").value;
+    const subject = document.getElementById("cf-subject").value;
+    const message = document.getElementById("cf-message").value;
 
-    const body = `Ada pengunjung baru yang minta dihubungi.\n\nEmail pengunjung: ${visitorEmail}`;
+    const body = `Nama: ${name}\nEmail: ${email}\n\n${message}`;
     const mailto = `mailto:${CONTACT_DESTINATION_EMAIL}?subject=${encodeURIComponent(
-      "[TernakCuan] Permintaan kontak baru"
+      "[TernakCuan] " + subject
     )}&body=${encodeURIComponent(body)}`;
 
     window.location.href = mailto;
