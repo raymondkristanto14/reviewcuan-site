@@ -292,7 +292,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
@@ -304,13 +304,11 @@
   }
   .product-card.popular:hover { transform: translateY(-6px); }
 
-  /* media: 60% lebar card + aspect-ratio 1:1, TIDAK ikut stretch ke tinggi card supaya gambar persegi utuh, nggak kepotong */
+  /* media: 60% lebar card, TINGGI ikut stretch penuh ke tinggi card (nggak ada sisa blank space di bawah gambar) */
   .product-media {
     position: relative;
     flex: 0 0 60%;
     width: 60%;
-    aspect-ratio: 1 / 1;
-    align-self: flex-start;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,7 +317,7 @@
     border-right: 1px solid var(--card-border);
     overflow: hidden;
   }
-  @media (max-width: 480px) { .product-media { flex: 0 0 auto; width: 100%; align-self: stretch; border-right: none; border-bottom: 1px solid var(--card-border); } }
+  @media (max-width: 480px) { .product-media { flex: 0 0 auto; width: 100%; aspect-ratio: 1 / 1; border-right: none; border-bottom: 1px solid var(--card-border); } }
   .product-media img {
     display: block;
     width: 100%;
@@ -358,11 +356,12 @@
   .product-body { flex: 1; padding: 16px 18px; display: flex; flex-direction: column; min-width: 0; }
   .product-name { font-size: 15.5px; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.01em; }
   .product-desc { color: var(--text-dim); font-size: 12px; line-height: 1.45; margin: 0 0 10px; }
-  .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 3px; min-height: 26px; }
-  .price-strike { color: var(--danger-strike); text-decoration: line-through; font-size: 13px; }
+  .price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-bottom: 3px; min-height: 26px; }
+  .price-strike { color: var(--danger-strike); text-decoration: line-through; font-size: 12px; white-space: nowrap; }
   .price-now {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 800;
+    white-space: nowrap;
     background: linear-gradient(90deg, #4ade80, #bbf7d0, #22c55e, #86efac, #4ade80);
     background-size: 300% auto;
     -webkit-background-clip: text;
@@ -379,12 +378,14 @@
     background: rgba(248, 113, 113, 0.12);
     border: 1px solid rgba(248, 113, 113, 0.35);
     color: #fca5a5;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 3px 8px;
     border-radius: 999px;
     margin-bottom: 8px;
     align-self: flex-start;
+    white-space: nowrap;
+    max-width: 100%;
   }
   .promo-timer svg { width: 11px; height: 11px; flex-shrink: 0; }
   .promo-timer #promoTimer { font-variant-numeric: tabular-nums; }
@@ -402,11 +403,6 @@
     color: var(--text);
     border: 1px solid var(--card-border);
   }
-  /* bullet fitur di bawah CTA — cuma tampil di desktop (layout mobile sengaja nggak disentuh) buat ngisi ruang kosong di kolom kanan */
-  .product-features { display: none; list-style: none; margin: 12px 0 0; padding: 0; flex-direction: column; gap: 6px; }
-  .product-features li { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--text-dim); }
-  .product-features li .check { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-3); display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 800; }
-  @media (min-width: 761px) { .product-features { display: flex; } }
   .unit-note { text-align: center; margin-top: 40px; font-size: 14px; color: var(--text-dim); }
   .unit-note strong { color: var(--accent-3); }
 
@@ -656,11 +652,6 @@
           </div>
           <div class="price-terms">Sekali bayar · Akses instan</div>
           <a href="#" class="buy-btn" data-lynk-tier="supplier">Ambil Sekarang</a>
-          <ul class="product-features">
-            <li><span class="check">✓</span> Supplier terpercaya, langsung dari tangan pertama</li>
-            <li><span class="check">✓</span> Harga cuma Rp15.000/pcs</li>
-            <li><span class="check">✓</span> Tanpa minimum order</li>
-          </ul>
         </div>
       </div>
 
@@ -678,15 +669,10 @@
           </div>
           <div class="promo-timer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            Promo berakhir dalam <span id="promoTimer">60:00</span>
+            Berakhir dalam <span id="promoTimer">60:00</span>
           </div>
           <div class="price-terms">Sekali bayar · Akses instan · Berlaku selamanya</div>
           <a href="#" class="buy-btn" data-lynk-tier="guide">Ambil Sekarang</a>
-          <ul class="product-features">
-            <li><span class="check">✓</span> Script closing siap pakai</li>
-            <li><span class="check">✓</span> Strategi deketin bisnis lokal</li>
-            <li><span class="check">✓</span> Update materi gratis selamanya</li>
-          </ul>
         </div>
       </div>
 
