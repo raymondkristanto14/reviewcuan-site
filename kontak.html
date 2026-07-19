@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kontak — ReviewCuan</title>
-<meta name="description" content="Ada pertanyaan sebelum atau sesudah beli produk ReviewCuan? Hubungi kami lewat form, email, atau WhatsApp." />
+<meta name="description" content="Ada pertanyaan sebelum atau sesudah beli produk ReviewCuan? Tinggalkan email kamu, kami akan hubungi balik." />
 <style>
   :root {
     --bg: #060608; --card: rgba(255,255,255,0.035); --card-border: rgba(255,255,255,0.09);
@@ -23,7 +23,7 @@
   .orb { position: fixed; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none; }
   .orb-1 { width: 480px; height: 480px; top: -180px; left: -140px; background: radial-gradient(circle, rgba(34,197,94,0.3), transparent 70%); }
   .orb-2 { width: 420px; height: 420px; bottom: -100px; right: -140px; background: radial-gradient(circle, rgba(74,222,128,0.22), transparent 70%); }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
   nav { position: sticky; top: 0; z-index: 50; background: rgba(6,6,8,0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); }
   .nav-inner { max-width: 900px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
@@ -36,11 +36,9 @@
   .legal-hero { padding: 56px 0 40px; position: relative; z-index: 1; text-align: center; }
   .legal-hero .eyebrow { color: var(--accent-3); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
   .legal-hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px; }
-  .legal-hero p { color: var(--text-dim); font-size: 15.5px; max-width: 480px; margin: 0 auto; }
+  .legal-hero p { color: var(--text-dim); font-size: 15.5px; max-width: 440px; margin: 0 auto; }
 
   .contact-section { padding: 0 0 90px; position: relative; z-index: 1; }
-  .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: start; }
-  @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
 
   .glass {
     background: var(--card); border: 1px solid var(--card-border);
@@ -49,16 +47,16 @@
     border-radius: 22px;
   }
 
-  .contact-form-card { padding: 32px; }
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .contact-form-card { padding: 36px; text-align: center; }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { text-align: left; }
   .form-row label { display: block; font-size: 13px; font-weight: 700; color: var(--text-dim); margin-bottom: 7px; }
-  .form-row input, .form-row textarea {
+  .form-row input {
     width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--card-border);
-    border-radius: 12px; padding: 12px 14px; color: var(--text); font-family: inherit;
+    border-radius: 12px; padding: 13px 14px; color: var(--text); font-family: inherit;
     font-size: 14.5px; transition: border-color 0.2s ease;
   }
-  .form-row input:focus, .form-row textarea:focus { outline: none; border-color: rgba(74,222,128,0.5); }
-  .form-row textarea { min-height: 130px; resize: vertical; }
+  .form-row input:focus { outline: none; border-color: rgba(74,222,128,0.5); }
   .contact-submit {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     background: linear-gradient(135deg, var(--accent-2), var(--accent), #16a34a);
@@ -69,17 +67,18 @@
   .contact-submit:hover { transform: translateY(-2px); }
   .contact-submit svg { width: 16px; height: 16px; }
   @keyframes btnGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  .form-note { font-size: 12.5px; color: var(--text-dim); margin-top: -2px; }
 
-  .contact-info-card { padding: 28px; }
-  .contact-info-card h3 { font-size: 15px; font-weight: 800; margin: 0 0 18px; }
-  .info-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 20px; }
-  .info-item:last-child { margin-bottom: 0; }
-  .info-item svg { width: 19px; height: 19px; color: var(--accent-3); flex-shrink: 0; margin-top: 2px; }
-  .info-label { font-size: 12.5px; color: var(--text-dim); margin-bottom: 3px; }
-  .info-value { font-weight: 700; font-size: 14.5px; }
-  .info-value a:hover { color: var(--accent-3); }
-  .info-hours { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+  .response-time {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 22px; padding: 9px 16px;
+    border: 1px dashed var(--card-border); border-radius: 999px;
+    font-size: 12.5px; color: var(--text-dim);
+  }
+  .response-time svg { width: 15px; height: 15px; color: var(--accent-3); flex-shrink: 0; }
+  .response-time strong { color: var(--text); font-weight: 700; }
+
+  .form-success { display: none; font-size: 14px; color: var(--accent-3); font-weight: 600; }
+  .form-success.show { display: block; }
 
   footer { border-top: 1px solid var(--card-border); padding: 40px 0 32px; text-align: center; color: var(--text-dim); font-size: 13px; position: relative; z-index: 1; }
   footer .footer-logo { font-weight: 800; color: var(--text); margin-bottom: 10px; font-size: 16px; }
@@ -90,7 +89,7 @@
     .wrap { padding: 0 20px; }
     .nav-inner { padding: 12px 20px; }
     .legal-hero { padding: 40px 0 32px; }
-    .contact-form-card, .contact-info-card { padding: 22px; }
+    .contact-form-card { padding: 24px; }
   }
 </style>
 </head>
@@ -113,66 +112,29 @@
   <div class="wrap">
     <div class="eyebrow">Kontak</div>
     <h1>Ada Pertanyaan? Kabarin Kami</h1>
-    <p>Sebelum beli, sesudah beli, atau ada kendala teknis — isi form di bawah atau hubungi kami langsung.</p>
+    <p>Tinggalkan email kamu, tim kami yang akan hubungi balik.</p>
   </div>
 </section>
 
 <section class="contact-section">
   <div class="wrap">
-    <div class="contact-grid">
+    <div class="contact-form-card glass">
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <label for="cf-email">Email kamu</label>
+          <input type="email" id="cf-email" name="email" placeholder="email@kamu.com" required />
+        </div>
+        <button type="submit" class="contact-submit">
+          Kirim
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <div class="form-success" id="formSuccess">Terima kasih! Email kamu sudah kami terima.</div>
+      </form>
 
-      <div class="contact-form-card glass">
-        <form class="contact-form" id="contactForm">
-          <div class="form-row">
-            <label for="cf-name">Nama</label>
-            <input type="text" id="cf-name" name="name" placeholder="Nama kamu" required />
-          </div>
-          <div class="form-row">
-            <label for="cf-email">Email</label>
-            <input type="email" id="cf-email" name="email" placeholder="email@kamu.com" required />
-          </div>
-          <div class="form-row">
-            <label for="cf-subject">Topik</label>
-            <input type="text" id="cf-subject" name="subject" placeholder="Contoh: Belum terima akses / Tanya sebelum beli" required />
-          </div>
-          <div class="form-row">
-            <label for="cf-message">Pesan</label>
-            <textarea id="cf-message" name="message" placeholder="Tulis pertanyaan atau kendala kamu di sini..." required></textarea>
-          </div>
-          <button type="submit" class="contact-submit">
-            Kirim Pesan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-          <div class="form-note">Klik "Kirim Pesan" akan membuka aplikasi email kamu dengan pesan yang sudah terisi otomatis, ditujukan ke hello@reviewcuan.id.</div>
-        </form>
+      <div class="response-time">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Waktu respon: <strong>1×24 jam</strong> pada hari kerja
       </div>
-
-      <div class="contact-info-card glass">
-        <h3>Kontak Langsung</h3>
-        <div class="info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6 12 13 2 6" /><path d="M2 6h20v12H2z" /></svg>
-          <div>
-            <div class="info-label">Email</div>
-            <div class="info-value"><a href="mailto:hello@reviewcuan.id">hello@reviewcuan.id</a></div>
-          </div>
-        </div>
-        <div class="info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <div>
-            <div class="info-label">WhatsApp</div>
-            <div class="info-value"><a href="https://wa.me/62GANTINOMORWA" target="_blank" rel="noopener noreferrer">GANTI-DENGAN-NOMOR-WA</a></div>
-          </div>
-        </div>
-        <div class="info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          <div>
-            <div class="info-label">Waktu Respon</div>
-            <div class="info-value">1×24 jam hari kerja</div>
-            <div class="info-hours">Senin–Jumat, 09.00–18.00 WIB</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -191,24 +153,29 @@
 </footer>
 
 <script>
-  // Form kontak ini belum terhubung ke backend/database (situs statis tanpa server).
-  // Saat submit, browser akan membuka aplikasi email default dengan isi form yang
-  // sudah terisi otomatis (mailto:). Kalau nanti mau pesan masuk otomatis ke
-  // dashboard/Google Sheet tanpa buka email manual, bisa diganti pakai layanan
-  // form-backend seperti Formspree / Google Form yang di-embed di sini.
-  document.getElementById("contactForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const name = document.getElementById("cf-name").value;
-    const email = document.getElementById("cf-email").value;
-    const subject = document.getElementById("cf-subject").value;
-    const message = document.getElementById("cf-message").value;
+  // ==== GANTI DENGAN ALAMAT EMAIL TUJUAN SETELAH SIAP ====
+  // Form ini cuma mengumpulkan alamat email pengunjung (bukan form pesan
+  // lengkap). Situs ini statis tanpa server, jadi submit akan membuka
+  // aplikasi email dengan email pengunjung sudah tercantum di isi pesan,
+  // ditujukan ke alamat di bawah. Kalau nanti mau submission masuk otomatis
+  // ke dashboard/Google Sheet tanpa buka email manual, form ini bisa
+  // disambungkan ke layanan seperti Formspree atau Google Form.
+  const CONTACT_DESTINATION_EMAIL = "GANTI-DENGAN-EMAIL-TUJUAN@domain.com";
 
-    const body = `Nama: ${name}\nEmail: ${email}\n\n${message}`;
-    const mailto = `mailto:hello@reviewcuan.id?subject=${encodeURIComponent(
-      "[ReviewCuan] " + subject
+  const form = document.getElementById("contactForm");
+  const successMsg = document.getElementById("formSuccess");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const visitorEmail = document.getElementById("cf-email").value;
+
+    const body = `Ada pengunjung baru yang minta dihubungi.\n\nEmail pengunjung: ${visitorEmail}`;
+    const mailto = `mailto:${CONTACT_DESTINATION_EMAIL}?subject=${encodeURIComponent(
+      "[ReviewCuan] Permintaan kontak baru"
     )}&body=${encodeURIComponent(body)}`;
 
     window.location.href = mailto;
+    successMsg.classList.add("show");
   });
 </script>
 
