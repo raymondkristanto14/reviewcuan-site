@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>TernakCuan — Segera Hadir</title>
-<meta name="description" content="TernakCuan lagi disiapin. Daftarin email kamu supaya langsung dikabarin begitu launching." />
+<meta name="description" content="TernakCuan lagi disiapin. Daftarin nomor WhatsApp kamu supaya langsung dikabarin begitu launching." />
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <style>
@@ -115,14 +115,14 @@
   }
 
   .comingsoon-form { display: flex; gap: 10px; margin-bottom: 14px; }
-  .comingsoon-form input[type="email"] {
+  .comingsoon-form input[type="tel"] {
     flex: 1; min-width: 0;
     background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
     border-radius: 12px; padding: 13px 16px; color: var(--text); font-family: inherit;
     font-size: 14.5px; transition: border-color 0.2s ease;
   }
-  .comingsoon-form input[type="email"]:focus { outline: none; border-color: rgba(74,222,128,0.5); }
-  .comingsoon-form input[type="email"]::placeholder { color: var(--text-dim); }
+  .comingsoon-form input[type="tel"]:focus { outline: none; border-color: rgba(74,222,128,0.5); }
+  .comingsoon-form input[type="tel"]::placeholder { color: var(--text-dim); }
   .comingsoon-submit {
     display: inline-flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, var(--accent-2), var(--accent), #16a34a);
@@ -164,14 +164,14 @@
     <img src="logo.png" alt="TernakCuan" class="comingsoon-logo" />
     <div class="comingsoon-eyebrow"><span class="dot"></span> Segera Hadir</div>
     <h1 class="comingsoon-title">Cara Baru Cuan Dari <span class="gradient-text">Kartu Review Google</span></h1>
-    <p class="comingsoon-sub">Kita lagi siapin semuanya biar makin matang. Daftarin email kamu, kita kabarin langsung begitu TernakCuan resmi launching.</p>
+    <p class="comingsoon-sub">Kita lagi siapin semuanya biar makin matang. Daftarin nomor WhatsApp kamu, kita kabarin langsung begitu TernakCuan resmi launching.</p>
 
     <form class="comingsoon-form" id="notifyForm">
-      <input type="email" id="notifyEmail" name="email" placeholder="email@kamu.com" required />
+      <input type="tel" id="notifyWhatsapp" name="whatsapp" placeholder="08xxxxxxxxxx" inputmode="numeric" autocomplete="tel" required />
       <button type="submit" class="comingsoon-submit">Ingetin Aku</button>
     </form>
     <div class="comingsoon-msg" id="notifyMsg"></div>
-    <div class="comingsoon-note">Nggak ada spam. Cuma 1 email pas hari launching.</div>
+    <div class="comingsoon-note">Nggak ada spam. Cuma 1 chat pas hari launching.</div>
   </div>
 </main>
 
@@ -188,33 +188,26 @@
 </footer>
 
 <script>
-  // ==== GANTI DENGAN URL WEB APP GOOGLE APPS SCRIPT KAMU SETELAH SETUP ====
-  // Cara setup (Google Sheets, gratis):
-  // 1. Buka Google Sheets baru, kasih nama misal "TernakCuan - Waitlist".
-  //    Baris 1 kasih header: Timestamp | Email
-  // 2. Menu Extensions > Apps Script.
-  // 3. Hapus kode default, ganti dengan:
-  //      function doPost(e) {
-  //        var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  //        sheet.appendRow([new Date(), e.parameter.email]);
-  //        return ContentService.createTextOutput(JSON.stringify({result:"success"}))
-  //          .setMimeType(ContentService.MimeType.JSON);
-  //      }
-  // 4. Klik Deploy > New deployment > pilih tipe "Web app".
-  //    Execute as: Me. Who has access: Anyone.
-  // 5. Deploy, lalu copy URL Web app (bentuknya https://script.google.com/macros/s/.../exec)
-  //    dan tempel di bawah ini.
+  // ==== URL WEB APP GOOGLE APPS SCRIPT (Sheet "TERNAK CUAN - Waiting List") ====
+  // Header sheet: Timestamp | Nomor WhatsApp
+  // Kode Apps Script (doPost) nyimpen ke kolom itu lewat e.parameter.whatsapp.
   const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzvrE7A-7yoNwhw6hR5XRPEU8gPVkjRMD9uBfp_d7aDzpPR_J0DUXiexRPbykcUJKX33A/exec";
 
   const form = document.getElementById("notifyForm");
   const msg = document.getElementById("notifyMsg");
-  const emailInput = document.getElementById("notifyEmail");
+  const waInput = document.getElementById("notifyWhatsapp");
   const submitBtn = form.querySelector(".comingsoon-submit");
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
-    const email = emailInput.value.trim();
-    if (!email) return;
+    const raw = waInput.value.trim();
+    const digitsOnly = raw.replace(/[^0-9]/g, "");
+
+    if (digitsOnly.length < 9) {
+      msg.textContent = "Nomor WhatsApp-nya kayaknya belum lengkap, cek lagi ya.";
+      msg.className = "comingsoon-msg show error";
+      return;
+    }
 
     if (GOOGLE_SHEET_ENDPOINT.indexOf("GANTI-DENGAN") === 0) {
       msg.textContent = "Form belum tersambung ke backend. Ikuti langkah setup di komentar kode ya.";
@@ -229,14 +222,14 @@
       // mode "no-cors" dipakai karena Google Apps Script Web App nggak ngirim
       // header CORS ke request dari domain lain — respons jadi "opaque" dan
       // nggak bisa dibaca isinya, jadi begitu fetch selesai tanpa error kita
-      // anggap berhasil (email tetap tercatat di Sheet-nya).
+      // anggap berhasil (nomornya tetap tercatat di Sheet-nya).
       await fetch(GOOGLE_SHEET_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ email: email }),
+        body: new URLSearchParams({ whatsapp: digitsOnly }),
       });
-      msg.textContent = "Sip! Email kamu udah kecatat. Kita kabarin begitu launching.";
+      msg.textContent = "Sip! Nomor kamu udah kecatat. Kita chat begitu launching.";
       msg.className = "comingsoon-msg show success";
       form.reset();
     } catch (err) {
