@@ -276,27 +276,25 @@
   .section-title { text-align: center; font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 20px; }
   .section-sub { text-align: center; color: var(--text-dim); max-width: 560px; margin: 0 auto 48px; font-size: 15.5px; }
 
-  /* ===== PRODUCTS — mobile: tier 1 di atas, tier 2 di bawah (nggak diubah). Desktop: tier 1 & 2 bersebelahan kiri-kanan. Tiap kartu: media kiri (1:1, nggak kepotong) + konten kanan ===== */
+  /* ===== PRODUCTS — layout sama di semua ukuran layar: thumbnail 1:1 di atas, deskripsi di bawah (persis versi mobile). Tier 1 & tier 2 tetap bersebelahan kiri-kanan mulai breakpoint desktop, tapi kartu dibikin nggak lebar-lebar supaya keduanya kelihatan tanpa scroll. Thumbnail pakai aspect-ratio CSS murni (bukan JS) supaya tetap 1:1 persis di resize ukuran window mana pun. ===== */
   #produk { padding-top: 60px; }
   .products-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 18px;
-    max-width: 780px;
+    gap: 20px;
+    max-width: 400px;
     margin: 0 auto;
-    align-items: stretch;
+    align-items: start;
   }
-  @media (min-width: 761px) { .products-grid { grid-template-columns: repeat(2, 1fr); max-width: 1200px; } }
+  @media (min-width: 761px) { .products-grid { grid-template-columns: repeat(2, 1fr); max-width: 780px; } }
   .product-card {
     border-radius: 20px;
     position: relative;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  @media (max-width: 480px) { .product-card { flex-direction: column; } }
   .product-card:hover { transform: translateY(-4px); }
   .product-card.popular {
     border: 1px solid rgba(74,222,128,0.5);
@@ -304,24 +302,18 @@
   }
   .product-card.popular:hover { transform: translateY(-6px); }
 
-  /* media: fallback lebar 44% + aspect-ratio 1:1 sebelum JS jalan. JS (syncProductMediaSize) lalu nyamain persis
-     width & height media ke tinggi asli .product-body, jadi gambar tetap persegi sempurna (nggak kepotong)
-     TANPA nyisain blank space di bawahnya — ukurannya otomatis ngikutin panjang konten masing-masing tier. */
   .product-media {
     position: relative;
-    flex: 0 0 44%;
-    width: 44%;
+    width: 100%;
     aspect-ratio: 1 / 1;
-    align-self: flex-start;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     background: linear-gradient(165deg, rgba(74,222,128,0.14), rgba(255,255,255,0.015) 60%);
-    border-right: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
     overflow: hidden;
   }
-  @media (max-width: 480px) { .product-media { flex: 0 0 auto !important; width: 100% !important; height: auto !important; align-self: stretch; aspect-ratio: 1 / 1; border-right: none; border-bottom: 1px solid var(--card-border); } }
   .product-media img {
     display: block;
     width: 100%;
@@ -906,36 +898,6 @@
       el.setAttribute("rel", "noopener noreferrer");
     }
   });
-
-  // Samain persis tinggi thumbnail produk (.product-media) dengan tinggi konten
-  // (.product-body) di masing-masing kartu, supaya gambar tetap persegi 1:1 utuh
-  // (nggak kepotong) TANPA nyisain blank space di bawahnya — otomatis ngikutin
-  // panjang konten tiap tier (tier 1 & tier 2 beda tinggi, jadi ukurannya beda juga).
-  // Cuma jalan di layout baris (>480px); di mode mobile (kartu ditumpuk), lebar
-  // penuh + aspect-ratio 1:1 dari CSS yang berlaku.
-  function syncProductMediaSize() {
-    document.querySelectorAll(".product-card").forEach((card) => {
-      const media = card.querySelector(".product-media");
-      const body = card.querySelector(".product-body");
-      if (!media || !body) return;
-      if (window.innerWidth <= 480) {
-        media.style.width = "";
-        media.style.height = "";
-        return;
-      }
-      const h = body.offsetHeight;
-      if (h > 0) {
-        media.style.width = h + "px";
-        media.style.height = h + "px";
-      }
-    });
-  }
-  window.addEventListener("load", syncProductMediaSize);
-  window.addEventListener("resize", syncProductMediaSize);
-  // Jalanin ulang sesaat setelah load buat jaga-jaga kalau font/gambar telat
-  // selesai render dan bikin tinggi body sedikit berubah.
-  setTimeout(syncProductMediaSize, 300);
-  syncProductMediaSize();
 
   // Nav hamburger (mobile)
   const navBurger = document.getElementById("navBurger");
