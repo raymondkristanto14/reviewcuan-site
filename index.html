@@ -73,17 +73,6 @@
 
   @keyframes btnGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-  /* NAV — cuma logo, halaman ini single-page jadi nggak butuh nav links */
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(6, 6, 8, 0.7);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--card-border);
-  }
-  .nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; }
-  .logo { display: inline-flex; align-items: center; }
-  .logo img { height: 20px; width: auto; display: block; }
-
   /* ===== COMING SOON HERO ===== */
   .comingsoon-main {
     flex: 1;
@@ -159,7 +148,6 @@
   footer .footer-links a:hover { color: var(--text); }
 
   @media (max-width: 640px) {
-    .nav-inner { padding: 12px 20px; }
     .comingsoon-main { padding: 40px 20px; }
     .comingsoon-card { padding: 36px 24px; }
   }
@@ -171,17 +159,11 @@
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
-<nav>
-  <div class="nav-inner">
-    <div class="logo"><img src="logo.png" alt="TernakCuan" /></div>
-  </div>
-</nav>
-
 <main class="comingsoon-main">
   <div class="comingsoon-card glass intro-1">
     <img src="logo.png" alt="TernakCuan" class="comingsoon-logo" />
     <div class="comingsoon-eyebrow"><span class="dot"></span> Segera Hadir</div>
-    <h1 class="comingsoon-title">Cara Baru Cuan dari <span class="gradient-text">Kartu Review Google</span></h1>
+    <h1 class="comingsoon-title">Cara Baru Cuan Dari <span class="gradient-text">Kartu Review Google</span></h1>
     <p class="comingsoon-sub">Kita lagi siapin semuanya biar makin matang. Daftarin email kamu, kita kabarin langsung begitu TernakCuan resmi launching.</p>
 
     <form class="comingsoon-form" id="notifyForm">
