@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gabung Affiliate TernakCuan — Komisi 20% Tiap Closing</title>
+<meta name="description" content="Daftar jadi affiliate TernakCuan, share link ke followers kamu dan dapetin komisi 20% tiap ada yang closing. Gratis, tanpa modal, tanpa perlu stok." />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<style>
+:root {
+  --bg: #060608;
+  --bg-soft: #0c0c11;
+  --card: rgba(255,255,255,0.035);
+  --card-border: rgba(255,255,255,0.09);
+  --text: #f5f5f7;
+  --text-dim: #a1a1aa;
+  --accent: #22c55e;
+  --accent-2: #4ade80;
+  --accent-3: #86efac;
+  --accent-soft: rgba(34, 197, 94, 0.14);
+  --danger: #f87171;
+  --radius: 20px;
+  --max-w: 1100px;
+  --form-max-w: 640px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "kern" 1;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  pointer-events: none;
+}
+.orb-1 { width: 520px; height: 520px; top: -180px; left: -120px; background: radial-gradient(circle, rgba(34,197,94,0.35), transparent 70%); }
+.orb-2 { width: 460px; height: 460px; top: 320px; right: -160px; background: radial-gradient(circle, rgba(74,222,128,0.28), transparent 70%); }
+.orb-3 { width: 420px; height: 420px; bottom: 0; left: 30%; background: radial-gradient(circle, rgba(134,239,172,0.2), transparent 70%); }
+
+.gradient-text {
+  background: linear-gradient(90deg, #4ade80, #bbf7d0, #22c55e, #86efac, #4ade80);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientShift 6s linear infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+@keyframes introUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.intro-1, .intro-2, .intro-3, .intro-4 { opacity: 0; animation: introUp 0.8s ease forwards; }
+.intro-1 { animation-delay: 0.05s; }
+.intro-2 { animation-delay: 0.2s; }
+.intro-3 { animation-delay: 0.35s; }
+.intro-4 { animation-delay: 0.5s; }
+
+@keyframes btnGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(6, 6, 8, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--card-border);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { display: inline-flex; align-items: center; }
+.logo img { height: 20px; width: auto; display: block; }
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--text-dim);
+  transition: color 0.2s ease;
+}
+.nav-back:hover { color: var(--text); }
+.nav-back svg { width: 14px; height: 14px; }
+
+/* HERO */
+.hero { padding: 56px 0 30px; text-align: center; }
+.commission-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(74,222,128,0.4);
+  color: var(--accent-3);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+.commission-pill svg { width: 15px; height: 15px; }
+.hero h1 {
+  font-size: clamp(30px, 5.6vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 auto 20px;
+  line-height: 1.12;
+  max-width: 820px;
+}
+.hero p.sub {
+  max-width: 560px;
+  margin: 0 auto 34px;
+  color: var(--text-dim);
+  font-size: 16.5px;
+}
+.hero-ctas { display: flex; justify-content: center; }
+.btn {
+  display: inline-block;
+  padding: 15px 34px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px) scale(1.02); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent), #16a34a);
+  background-size: 200% 200%;
+  animation: btnGradient 4s ease infinite;
+  color: #fff;
+  box-shadow: 0 10px 30px -8px rgba(34,197,94,0.55);
+}
+
+/* BENEFITS */
+.benefits {
+  max-width: 860px;
+  margin: 0 auto 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 720px) { .benefits { grid-template-columns: 1fr; } }
+.benefit-card {
+  border-radius: 16px;
+  padding: 18px 18px 20px;
+  text-align: left;
+}
+.benefit-icon {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.benefit-icon svg { width: 18px; height: 18px; color: #fff; }
+.benefit-title { font-weight: 700; font-size: 14.5px; margin-bottom: 4px; }
+.benefit-desc { font-size: 12.5px; color: var(--text-dim); line-height: 1.45; }
+
+/* FORM SECTION */
+.form-section { padding: 56px 0 96px; }
+.form-card {
+  max-width: var(--form-max-w);
+  margin: 0 auto;
+  border-radius: 24px;
+  padding: 36px 32px 32px;
+}
+@media (max-width: 640px) { .form-card { padding: 26px 20px 24px; border-radius: 20px; } }
+
+.form-title { font-size: 22px; font-weight: 800; margin: 0 0 6px; text-align: center; }
+.form-sub { font-size: 13.5px; color: var(--text-dim); text-align: center; margin: 0 0 28px; }
+
+.field { margin-bottom: 20px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.field label .opt { color: var(--text-dim); font-weight: 400; }
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"] {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font-size: 14.5px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  font-family: inherit;
+}
+.field input::placeholder { color: #6b6b74; }
+.field input:focus {
+  border-color: rgba(74,222,128,0.55);
+  background: rgba(255,255,255,0.06);
+}
+.field input.field-error { border-color: var(--danger); }
+.field-hint { font-size: 11.5px; color: var(--text-dim); margin-top: 6px; }
+.field-errmsg { font-size: 11.5px; color: var(--danger); margin-top: 6px; display: none; }
+.field-errmsg.show { display: block; }
+
+/* Platform chip checkboxes */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+@media (max-width: 480px) { .platform-grid { grid-template-columns: repeat(2, 1fr); } }
+.platform-chip { position: relative; }
+.platform-chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+.platform-chip label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.03);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  margin: 0;
+  text-align: center;
+}
+.platform-chip label svg { width: 16px; height: 16px; flex-shrink: 0; }
+.platform-chip input:checked + label {
+  border-color: rgba(74,222,128,0.6);
+  background: linear-gradient(135deg, rgba(74,222,128,0.18), rgba(34,197,94,0.1));
+  color: var(--accent-3);
+  box-shadow: 0 0 0 1px rgba(74,222,128,0.3);
+}
+.platform-chip input:focus-visible + label { outline: 2px solid var(--accent-3); outline-offset: 2px; }
+
+/* Dynamic username boxes */
+.username-boxes { margin-top: 14px; display: flex; flex-direction: column; gap: 12px; }
+.username-box {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 8px 10px 8px 12px;
+  animation: introUp 0.35s ease forwards;
+}
+.username-box .ub-icon {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: rgba(74,222,128,0.14);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.username-box .ub-icon svg { width: 14px; height: 14px; color: var(--accent-3); }
+.username-box input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 14px;
+  padding: 6px 4px;
+  font-family: inherit;
+}
+.username-box input::placeholder { color: #6b6b74; }
+.username-box.field-error { border-color: var(--danger); }
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 16px;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent), #16a34a);
+  background-size: 200% 200%;
+  animation: btnGradient 4s ease infinite;
+  box-shadow: 0 10px 30px -8px rgba(34,197,94,0.55);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.submit-btn:hover { transform: translateY(-2px); }
+.submit-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+.spinner {
+  width: 16px; height: 16px;
+  border: 2.5px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+.submit-btn.loading .spinner { display: inline-block; }
+.submit-btn.loading .submit-label { opacity: 0.85; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.form-footnote { font-size: 11.5px; color: var(--text-dim); text-align: center; margin-top: 14px; }
+
+.form-error-banner {
+  display: none;
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.35);
+  color: #fca5a5;
+  font-size: 13px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+.form-error-banner.show { display: block; }
+
+/* SUCCESS STATE */
+.success-state { display: none; text-align: center; padding: 20px 0 6px; }
+.success-state.show { display: block; }
+.success-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 30px -6px rgba(34,197,94,0.6);
+}
+.success-icon svg { width: 30px; height: 30px; color: #fff; }
+.success-state h3 { font-size: 20px; font-weight: 800; margin: 0 0 10px; }
+.success-state p { font-size: 14px; color: var(--text-dim); max-width: 420px; margin: 0 auto; }
+
+footer { border-top: 1px solid var(--card-border); padding: 40px 0 30px; text-align: center; color: var(--text-dim); font-size: 13px; }
+footer .footer-logo { display: flex; justify-content: center; margin-bottom: 10px; }
+footer .footer-logo img { height: 22px; width: auto; display: block; }
+footer .footer-links { display: flex; gap: 20px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+footer .footer-links a:hover { color: var(--text); }
+
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .nav-inner { padding: 12px 20px; }
+  .hero { padding: 36px 0 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><img src="logo.png" alt="TernakCuan" /></div>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Kembali ke Beranda
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="commission-pill intro-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Komisi 20% Tiap Closing — Tanpa Batas
+    </div>
+    <h1 class="intro-2">Punya Followers? Ubah Jadi <span class="gradient-text">Cuan Bulanan</span> Bareng TernakCuan</h1>
+    <p class="sub intro-3">
+      Cukup share link kamu ke followers atau kontak kamu. Tiap ada yang beli produk TernakCuan lewat
+      link itu, kamu langsung dapet <strong style="color:var(--text)">komisi 20%</strong> — nggak perlu
+      stok barang, nggak perlu ribet kirim-kirim, nggak ada batas berapa kali kamu bisa cuan.
+    </p>
+    <div class="hero-ctas intro-4">
+      <a href="#daftar" class="btn btn-primary">Daftar Jadi Affiliate</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="benefits reveal">
+      <div class="benefit-card glass">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="benefit-title">Komisi 20% Per Closing</div>
+        <div class="benefit-desc">Tiap transaksi lewat link kamu, langsung dihitung 20% dari harga produk buat kamu.</div>
+      </div>
+      <div class="benefit-card glass">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 1 4.438 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 3.138 3.138 3.42 3.42 0 0 0 .806 1.946 3.42 3.42 0 0 1 0 4.438 3.42 3.42 0 0 0-.806 1.946 3.42 3.42 0 0 1-3.138 3.138 3.42 3.42 0 0 0-1.946.806 3.42 3.42 0 0 1-4.438 0 3.42 3.42 0 0 0-1.946-.806 3.42 3.42 0 0 1-3.138-3.138 3.42 3.42 0 0 0-.806-1.946 3.42 3.42 0 0 1 0-4.438 3.42 3.42 0 0 0 .806-1.946 3.42 3.42 0 0 1 3.138-3.138z"/></svg></div>
+        <div class="benefit-title">Nggak Perlu Modal / Stok</div>
+        <div class="benefit-desc">Kamu cuma share link. Semua urusan kartu, supplier, dan pengiriman kami yang urus.</div>
+      </div>
+      <div class="benefit-card glass">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <div class="benefit-title">Link & Materi Promo Siap Pakai</div>
+        <div class="benefit-desc">Setelah keterima, kamu dapet link affiliate pribadi + materi promo yang tinggal kamu share.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="daftar">
+  <div class="wrap">
+    <div class="form-card glass reveal">
+
+      <div id="formErrorBanner" class="form-error-banner"></div>
+
+      <form id="affiliateForm" novalidate>
+        <div class="form-title">Daftar Jadi Affiliate TernakCuan</div>
+        <p class="form-sub">Isi data kamu di bawah — tim kami bakal review dan kirim link affiliate kamu.</p>
+
+        <div class="field">
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" placeholder="Nama sesuai KTP/panggilan" autocomplete="name" />
+          <div class="field-errmsg" data-err="nama">Nama wajib diisi.</div>
+        </div>
+
+        <div class="field">
+          <label>Kamu aktif promosi/jualan di platform mana? <span class="opt">(boleh pilih lebih dari satu)</span></label>
+          <div class="platform-grid" id="platformGrid">
+            <div class="platform-chip">
+              <input type="checkbox" id="pf-instagram" value="Instagram" data-key="instagram" />
+              <label for="pf-instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+                Instagram
+              </label>
+            </div>
+            <div class="platform-chip">
+              <input type="checkbox" id="pf-tiktok" value="TikTok" data-key="tiktok" />
+              <label for="pf-tiktok">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3v10.5a3.5 3.5 0 1 1-3-3.46V7a7 7 0 0 0 7 3V7a4 4 0 0 1-4-4z"/></svg>
+                TikTok
+              </label>
+            </div>
+            <div class="platform-chip">
+              <input type="checkbox" id="pf-youtube" value="YouTube" data-key="youtube" />
+              <label for="pf-youtube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+                YouTube
+              </label>
+            </div>
+            <div class="platform-chip">
+              <input type="checkbox" id="pf-facebook" value="Facebook" data-key="facebook" />
+              <label for="pf-facebook">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9h3V6h-3a4 4 0 0 0-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2a1 1 0 0 1 1-1z"/></svg>
+                Facebook
+              </label>
+            </div>
+            <div class="platform-chip">
+              <input type="checkbox" id="pf-x" value="X (Twitter)" data-key="x" />
+              <label for="pf-x">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg>
+                X
+              </label>
+            </div>
+            <div class="platform-chip">
+              <input type="checkbox" id="pf-threads" value="Threads" data-key="threads" />
+              <label for="pf-threads">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4c-3 1.5-4 4.5-4 8s1 8.5 8 8c5 0 7-3 7-6 0-3.5-3-5-6-4.5-2 .3-3 1.6-3 3 0 1.2 1 2 2.3 2 1.8 0 3.2-1.5 3.4-4 .2-3-1.5-6-5-6.5"/></svg>
+                Threads
+              </label>
+            </div>
+          </div>
+          <div class="field-errmsg" data-err="platforms">Pilih minimal 1 platform.</div>
+
+          <div class="username-boxes" id="usernameBoxes"></div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="email@kamu.com" autocomplete="email" />
+          <div class="field-hint">Link affiliate & undangan bakal dikirim ke email ini.</div>
+          <div class="field-errmsg" data-err="email">Masukin email yang valid.</div>
+        </div>
+
+        <div class="field">
+          <label for="whatsapp">Nomor WhatsApp</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx" autocomplete="tel" inputmode="numeric" />
+          <div class="field-hint">Kami juga bakal follow-up lewat WhatsApp ke nomor ini.</div>
+          <div class="field-errmsg" data-err="whatsapp">Masukin nomor WhatsApp yang valid (10-15 digit).</div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span class="spinner"></span>
+          <span class="submit-label">Daftar Jadi Affiliate Sekarang</span>
+        </button>
+        <div class="form-footnote">Dengan daftar, kamu setuju data kamu dipakai buat proses affiliate TernakCuan.</div>
+      </form>
+
+      <div class="success-state" id="successState">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3>Pendaftaran Berhasil!</h3>
+        <p>Tim kami bakal review data kamu dan kirim link affiliate + instruksi lengkap lewat Email &amp; WhatsApp yang kamu daftarin, biasanya dalam 1x24 jam.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-logo"><img src="logo.png" alt="TernakCuan" /></div>
+    <div class="footer-links">
+      <a href="kebijakan-privasi.html">Kebijakan Privasi</a>
+      <a href="syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
+      <a href="kontak.html">Kontak</a>
+    </div>
+    <div>© 2026 TernakCuan. Seluruh hak cipta dilindungi.</div>
+  </div>
+</footer>
+
+<script>
+// ==== GANTI URL APPS SCRIPT DI SINI KALAU DEPLOYMENT BARU ====
+const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbzE9Q7Rcox1MribhyOIDUsMNB7OXUOguX3KAXESgTGUKgzgopQMkJYh6W5ZwK_Z3Skh4A/exec";
+
+// Reveal-on-scroll
+const revealEls = document.querySelectorAll(".reveal");
+const io = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        io.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
+revealEls.forEach((el) => io.observe(el));
+
+// ==== Dynamic per-platform username boxes ====
+const PLATFORM_META = {
+  instagram: { label: "Username Instagram", placeholder: "@usernamekamu" },
+  tiktok: { label: "Username TikTok", placeholder: "@usernamekamu" },
+  youtube: { label: "Nama/Link Channel YouTube", placeholder: "Nama channel atau link" },
+  facebook: { label: "Username/Link Facebook", placeholder: "Nama profil atau link" },
+  x: { label: "Username X (Twitter)", placeholder: "@usernamekamu" },
+  threads: { label: "Username Threads", placeholder: "@usernamekamu" },
+};
+
+const usernameBoxes = document.getElementById("usernameBoxes");
+const platformGrid = document.getElementById("platformGrid");
+
+function syncUsernameBoxes() {
+  const checked = Array.from(platformGrid.querySelectorAll("input[type=checkbox]:checked"));
+  const checkedKeys = checked.map((c) => c.dataset.key);
+
+  // Remove boxes for unchecked platforms
+  Array.from(usernameBoxes.children).forEach((box) => {
+    if (!checkedKeys.includes(box.dataset.key)) box.remove();
+  });
+
+  // Add boxes for newly checked platforms, keeping checkbox order
+  checked.forEach((cb) => {
+    const key = cb.dataset.key;
+    if (usernameBoxes.querySelector(`[data-key="${key}"]`)) return;
+    const meta = PLATFORM_META[key];
+    const box = document.createElement("div");
+    box.className = "username-box";
+    box.dataset.key = key;
+    box.innerHTML = `
+      <span class="ub-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      <input type="text" placeholder="${meta.placeholder}" aria-label="${meta.label}" data-username-key="${key}" />
+    `;
+    usernameBoxes.appendChild(box);
+  });
+}
+platformGrid.addEventListener("change", () => {
+  syncUsernameBoxes();
+  clearFieldError("platforms");
+});
+
+// ==== Validation helpers ====
+function showFieldError(key) {
+  const msg = document.querySelector(`.field-errmsg[data-err="${key}"]`);
+  if (msg) msg.classList.add("show");
+}
+function clearFieldError(key) {
+  const msg = document.querySelector(`.field-errmsg[data-err="${key}"]`);
+  if (msg) msg.classList.remove("show");
+}
+function setInputError(el, hasError) {
+  if (!el) return;
+  el.classList.toggle("field-error", hasError);
+}
+
+function isValidEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+}
+function isValidWhatsapp(v) {
+  const digits = v.replace(/[^\d]/g, "");
+  return digits.length >= 9 && digits.length <= 15;
+}
+
+const form = document.getElementById("affiliateForm");
+const submitBtn = document.getElementById("submitBtn");
+const errorBanner = document.getElementById("formErrorBanner");
+const successState = document.getElementById("successState");
+
+const namaInput = document.getElementById("nama");
+const emailInput = document.getElementById("email");
+const waInput = document.getElementById("whatsapp");
+
+[namaInput, emailInput, waInput].forEach((el) => {
+  el.addEventListener("input", () => {
+    setInputError(el, false);
+    clearFieldError(el.id);
+  });
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  errorBanner.classList.remove("show");
+
+  let valid = true;
+
+  // Nama
+  const nama = namaInput.value.trim();
+  if (!nama) {
+    setInputError(namaInput, true);
+    showFieldError("nama");
+    valid = false;
+  }
+
+  // Platforms
+  const checkedBoxes = Array.from(platformGrid.querySelectorAll("input[type=checkbox]:checked"));
+  if (checkedBoxes.length === 0) {
+    showFieldError("platforms");
+    valid = false;
+  }
+
+  // Usernames for each selected platform
+  const usernames = {};
+  let usernameMissing = false;
+  checkedBoxes.forEach((cb) => {
+    const key = cb.dataset.key;
+    const box = usernameBoxes.querySelector(`[data-key="${key}"]`);
+    const input = box ? box.querySelector("input") : null;
+    const val = input ? input.value.trim() : "";
+    usernames[key] = val;
+    if (!val) {
+      usernameMissing = true;
+      if (box) box.classList.add("field-error");
+    } else if (box) {
+      box.classList.remove("field-error");
+    }
+  });
+  if (usernameMissing) valid = false;
+
+  // Email
+  const email = emailInput.value.trim();
+  if (!isValidEmail(email)) {
+    setInputError(emailInput, true);
+    showFieldError("email");
+    valid = false;
+  }
+
+  // WhatsApp
+  const whatsapp = waInput.value.trim();
+  if (!isValidWhatsapp(whatsapp)) {
+    setInputError(waInput, true);
+    showFieldError("whatsapp");
+    valid = false;
+  }
+
+  if (!valid) {
+    errorBanner.textContent = "Ada beberapa data yang belum lengkap/valid — cek lagi ya, sudah kami tandain di atas.";
+    errorBanner.classList.add("show");
+    errorBanner.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  // Submit
+  submitBtn.disabled = true;
+  submitBtn.classList.add("loading");
+
+  const platformNames = checkedBoxes.map((cb) => cb.value).join(", ");
+
+  const payload = new FormData();
+  payload.append("nama", nama);
+  payload.append("platforms", platformNames);
+  payload.append("username_instagram", usernames.instagram || "");
+  payload.append("username_tiktok", usernames.tiktok || "");
+  payload.append("username_youtube", usernames.youtube || "");
+  payload.append("username_facebook", usernames.facebook || "");
+  payload.append("username_x", usernames.x || "");
+  payload.append("username_threads", usernames.threads || "");
+  payload.append("email", email);
+  payload.append("whatsapp", whatsapp);
+
+  try {
+    await fetch(SUBMIT_URL, { method: "POST", body: payload, mode: "no-cors" });
+    form.style.display = "none";
+    successState.classList.add("show");
+    successState.scrollIntoView({ behavior: "smooth", block: "center" });
+  } catch (err) {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove("loading");
+    errorBanner.textContent = "Gagal mengirim data, coba lagi sebentar ya. Kalau masih gagal, hubungi kami lewat halaman Kontak.";
+    errorBanner.classList.add("show");
+    errorBanner.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+});
+</script>
+
+</body>
+</html>
