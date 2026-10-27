@@ -462,7 +462,7 @@ footer .footer-links a:hover { color: var(--text); }
         <div class="field">
           <label for="nama">Nama Lengkap</label>
           <input type="text" id="nama" name="nama" placeholder="Nama sesuai KTP" autocomplete="name" />
-          <div class="field-errmsg" data-err="nama">Nama wajib diisi.</div>
+          <div class="field-errmsg" data-err="nama">Nama lengkap wajib diisi (minimal 3 huruf, bukan angka).</div>
         </div>
 
         <div class="field">
@@ -520,21 +520,21 @@ footer .footer-links a:hover { color: var(--text); }
           <label for="email">Email</label>
           <input type="email" id="email" name="email" placeholder="email@kamu.com" autocomplete="email" />
           <div class="field-hint">Link affiliate & undangan bakal dikirim ke email ini.</div>
-          <div class="field-errmsg" data-err="email">Masukin email yang valid.</div>
+          <div class="field-errmsg" data-err="email">Masukin email yang valid dan cek typo (contoh: nama@gmail.com).</div>
         </div>
 
         <div class="field">
           <label for="whatsapp">Nomor WhatsApp</label>
           <input type="tel" id="whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx" autocomplete="tel" inputmode="numeric" />
           <div class="field-hint">Kami juga bakal follow-up lewat WhatsApp ke nomor ini.</div>
-          <div class="field-errmsg" data-err="whatsapp">Masukin nomor WhatsApp yang valid (10-15 digit).</div>
+          <div class="field-errmsg" data-err="whatsapp">Masukin nomor WhatsApp aktif yang valid (contoh: 0812xxxxxxxx).</div>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">
           <span class="spinner"></span>
-          <span class="submit-label">Daftar Jadi Affiliate Sekarang</span>
+          <span class="submit-label">Daftar &amp; Gabung Group Affiliate Sekarang</span>
         </button>
-        <div class="form-footnote">Dengan daftar, kamu setuju data kamu dipakai buat proses affiliate TernakCuan.</div>
+        <div class="form-footnote">Dengan daftar, kamu setuju data kamu dipakai buat proses affiliate TernakCuan. Setelah daftar, kamu akan diarahkan ke group WhatsApp affiliate.</div>
       </form>
 
       <div class="success-state" id="successState">
@@ -542,7 +542,9 @@ footer .footer-links a:hover { color: var(--text); }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
         </div>
         <h3>Pendaftaran Berhasil!</h3>
-        <p>Tim kami bakal review data kamu dan kirim link affiliate + instruksi lengkap lewat Email &amp; WhatsApp yang kamu daftarin, biasanya dalam 1x24 jam.</p>
+        <p>Langkah terakhir: <strong>gabung ke group WhatsApp affiliate</strong> biar kamu dapat link affiliate, panduan, dan info terbaru. Tim kami juga bakal kirim detailnya lewat Email &amp; WhatsApp yang kamu daftarin.</p>
+          <a class="submit-btn" id="joinGroupBtn" href="https://chat.whatsapp.com/KM61z6iiPJpBrbz0h2wTq3" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:18px;">Gabung Group WhatsApp Affiliate</a>
+          <p style="font-size:12.5px;color:var(--text-dim);margin-top:12px;">Kalau tombol tidak terbuka, salin link ini: https://chat.whatsapp.com/KM61z6iiPJpBrbz0h2wTq3</p>
       </div>
 
     </div>
@@ -636,12 +638,37 @@ function setInputError(el, hasError) {
   el.classList.toggle("field-error", hasError);
 }
 
+function isValidName(v) {
+  const n = v.trim();
+  return n.length >= 3 && /[A-Za-z\u00C0-\u024F]/.test(n) && !/^[\d\s.\-]+$/.test(n) && !/@/.test(n);
+}
+function isValidUsername(v) {
+  const u = v.trim().replace(/^@/, "");
+  return u.length >= 3 && !/@/.test(u);
+}
+const BAD_EMAIL_DOMAINS = ["gmial.com","gmai.com","gamil.com","gmail.co","gmail.con","gmail.cm","gmail.om","gmil.com","gnail.com","yahoo.con","yahooo.com","hotmail.con","outlook.con"];
 function isValidEmail(v) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  const e = v.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/.test(e)) return false;
+  const domain = e.split("@")[1];
+  if (BAD_EMAIL_DOMAINS.includes(domain)) return false;
+  return !/\.(con|cim|vom|cmo)$/.test(domain);
+}
+// Normalisasi nomor WA: 08xx / 8xx / 62xx / +62xx -> 62xxxxxxxxxx. Nomor luar negeri harus diawali +kode negara.
+function normalizeWhatsapp(v) {
+  const raw = v.trim();
+  const digits = raw.replace(/[^\d]/g, "");
+  if (raw.startsWith("+") && !digits.startsWith("62")) return digits;
+  if (digits.startsWith("62")) return digits;
+  if (digits.startsWith("0")) return "62" + digits.slice(1);
+  if (digits.startsWith("8")) return "62" + digits;
+  return digits;
 }
 function isValidWhatsapp(v) {
-  const digits = v.replace(/[^\d]/g, "");
-  return digits.length >= 9 && digits.length <= 15;
+  const raw = v.trim();
+  const n = normalizeWhatsapp(raw);
+  if (n.startsWith("62")) return /^628\d{7,10}$/.test(n);
+  return raw.startsWith("+") && n.length >= 8 && n.length <= 15;
 }
 
 const form = document.getElementById("affiliateForm");
@@ -668,7 +695,7 @@ form.addEventListener("submit", async (e) => {
 
   // Nama
   const nama = namaInput.value.trim();
-  if (!nama) {
+  if (!isValidName(nama)) {
     setInputError(namaInput, true);
     showFieldError("nama");
     valid = false;
@@ -690,7 +717,7 @@ form.addEventListener("submit", async (e) => {
     const input = box ? box.querySelector("input") : null;
     const val = input ? input.value.trim() : "";
     usernames[key] = val;
-    if (!val) {
+    if (!isValidUsername(val)) {
       usernameMissing = true;
       if (box) box.classList.add("field-error");
     } else if (box) {
@@ -738,7 +765,7 @@ form.addEventListener("submit", async (e) => {
   payload.append("username_x", usernames.x || "");
   payload.append("username_threads", usernames.threads || "");
   payload.append("email", email);
-  payload.append("whatsapp", whatsapp);
+  payload.append("whatsapp", normalizeWhatsapp(whatsapp));
 
   try {
     await fetch(SUBMIT_URL, { method: "POST", body: payload, mode: "no-cors" });
