@@ -583,6 +583,30 @@
     .review-card.card-md { width: 127px; height: 127px; left: 0; bottom: 18px; }
   }
 .product-subtitle { margin: 0 0 10px; font-size: 13.5px; color: var(--text-dim); }
+
+/* ===== TESTIMONI RESELLER: marquee screenshot kanan ke kiri ===== */
+#testimoni { padding-bottom: 72px; }
+#testimoni .marquee-wrap { padding: 8px 0 14px; }
+#testimoni .marquee-track { gap: 22px; padding-right: 22px; align-items: flex-start; animation-duration: 100s; }
+#testimoni .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+.testi-shot { flex: 0 0 auto; height: 560px; padding: 0; margin: 0; font: inherit; color: inherit; background: #0c0c11; border: 1px solid var(--card-border); border-radius: 22px; overflow: hidden; cursor: zoom-in; box-shadow: 0 8px 32px rgba(0,0,0,0.45); -webkit-tap-highlight-color: transparent; transition: transform 0.2s ease, border-color 0.2s ease; }
+.testi-shot:hover { transform: translateY(-4px); border-color: rgba(134,239,172,0.45); }
+.testi-shot img { display: block; height: 100%; width: auto; max-width: none; }
+.tm-note { text-align: center; margin: 14px auto 0; padding: 0 20px; font-size: 12.5px; color: var(--text-dim); }
+.tm-lightbox { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,0.9); cursor: zoom-out; }
+.tm-lightbox[hidden] { display: none; }
+.tm-lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+.tm-close { position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--card-border); background: rgba(255,255,255,0.14); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; }
+@media (max-width: 640px) {
+#testimoni { padding-bottom: 56px; }
+#testimoni .marquee-track { gap: 14px; padding-right: 14px; animation-duration: 80s; }
+.testi-shot { height: 440px; border-radius: 18px; }
+.tm-lightbox { padding: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+#testimoni .marquee-wrap { overflow-x: auto; }
+#testimoni .marquee-track { animation: none; }
+}
 </style>
 </head>
 <body>
@@ -761,84 +785,37 @@
   </div>
 </section>
 
-<section id="testimoni" style="display:none;"><!-- Hidden sementara: belum ada material testimoni asli -->
-  <div class="wrap">
-    <div class="section-label reveal">Testimoni</div>
-    <h2 class="section-title reveal">Bukan Gimik Tapi Sistem Yang Terbukti Hasilin Cuan</h2>
-    <p class="section-sub reveal">Semua orang berhasil cuan. Tunggu apalagi?</p>
-  </div>
+<section id="testimoni">
+<div class="wrap">
+<div class="section-label reveal">Testimoni</div>
+<h2 class="section-title reveal">Bukan Gimik Tapi Sistem Yang Terbukti Hasilin Cuan</h2>
+<p class="section-sub reveal">Cerita langsung dari reseller yang sudah closing. Klik gambar untuk memperbesar.</p>
+</div>
 
-  <div class="marquee-wrap reveal">
-    <div class="marquee-track" id="marqueeTrack">
-      <!-- kartu akan diduplikasi otomatis lewat JS supaya looping mulus -->
-      <div class="testi-card glass">
-        <div class="testi-head">
-          <div class="testi-avatar">R1</div>
-          <div>
-            <div class="testi-name">Nama Reseller</div>
-            <div class="testi-role">Kota, mulai bulan ini</div>
-          </div>
-        </div>
-        <div class="testi-quote">"[Testimoni asli akan ditempel di sini setelah ada reseller pertama.]"</div>
-        <div class="testi-badge">Slot testimoni</div>
-      </div>
-      <div class="testi-card glass">
-        <div class="testi-head">
-          <div class="testi-avatar">R2</div>
-          <div>
-            <div class="testi-name">Nama Reseller</div>
-            <div class="testi-role">Kota, mulai bulan ini</div>
-          </div>
-        </div>
-        <div class="testi-quote">"[Testimoni asli akan ditempel di sini setelah ada reseller pertama.]"</div>
-        <div class="testi-badge">Slot testimoni</div>
-      </div>
-      <div class="testi-card glass">
-        <div class="testi-head">
-          <div class="testi-avatar">R3</div>
-          <div>
-            <div class="testi-name">Nama Reseller</div>
-            <div class="testi-role">Kota, mulai bulan ini</div>
-          </div>
-        </div>
-        <div class="testi-quote">"[Testimoni asli akan ditempel di sini setelah ada reseller pertama.]"</div>
-        <div class="testi-badge">Slot testimoni</div>
-      </div>
-      <div class="testi-card glass">
-        <div class="testi-head">
-          <div class="testi-avatar">R4</div>
-          <div>
-            <div class="testi-name">Nama Reseller</div>
-            <div class="testi-role">Kota, mulai bulan ini</div>
-          </div>
-        </div>
-        <div class="testi-quote">"[Testimoni asli akan ditempel di sini setelah ada reseller pertama.]"</div>
-        <div class="testi-badge">Slot testimoni</div>
-      </div>
-      <div class="testi-card glass">
-        <div class="testi-head">
-          <div class="testi-avatar">R5</div>
-          <div>
-            <div class="testi-name">Nama Reseller</div>
-            <div class="testi-role">Kota, mulai bulan ini</div>
-          </div>
-        </div>
-        <div class="testi-quote">"[Testimoni asli akan ditempel di sini setelah ada reseller pertama.]"</div>
-        <div class="testi-badge">Slot testimoni</div>
-      </div>
-      <div class="testi-card glass">
-        <div class="testi-head">
-          <div class="testi-avatar">R6</div>
-          <div>
-            <div class="testi-name">Nama Reseller</div>
-            <div class="testi-role">Kota, mulai bulan ini</div>
-          </div>
-        </div>
-        <div class="testi-quote">"[Testimoni asli akan ditempel di sini setelah ada reseller pertama.]"</div>
-        <div class="testi-badge">Slot testimoni</div>
-      </div>
-    </div>
-  </div>
+<div class="marquee-wrap reveal">
+<div class="marquee-track" id="marqueeTrack">
+<button type="button" class="testi-shot" data-full="testimoni/t01.webp" aria-label="Perbesar testimoni 1"><img src="testimoni/t01.webp" width="1234" height="796" alt="Testimoni reseller TernakCuan 1 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t02.webp" aria-label="Perbesar testimoni 2"><img src="testimoni/t02.webp" width="930" height="1000" alt="Testimoni reseller TernakCuan 2 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t03.webp" aria-label="Perbesar testimoni 3"><img src="testimoni/t03.webp" width="735" height="1000" alt="Testimoni reseller TernakCuan 3 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t04.webp" aria-label="Perbesar testimoni 4"><img src="testimoni/t04.webp" width="908" height="1000" alt="Testimoni reseller TernakCuan 4 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t05.webp" aria-label="Perbesar testimoni 5"><img src="testimoni/t05.webp" width="719" height="1000" alt="Testimoni reseller TernakCuan 5 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t06.webp" aria-label="Perbesar testimoni 6"><img src="testimoni/t06.webp" width="727" height="1000" alt="Testimoni reseller TernakCuan 6 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t07.webp" aria-label="Perbesar testimoni 7"><img src="testimoni/t07.webp" width="721" height="1000" alt="Testimoni reseller TernakCuan 7 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t08.webp" aria-label="Perbesar testimoni 8"><img src="testimoni/t08.webp" width="713" height="1000" alt="Testimoni reseller TernakCuan 8 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t09.webp" aria-label="Perbesar testimoni 9"><img src="testimoni/t09.webp" width="937" height="1000" alt="Testimoni reseller TernakCuan 9 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t10.webp" aria-label="Perbesar testimoni 10"><img src="testimoni/t10.webp" width="1011" height="1000" alt="Testimoni reseller TernakCuan 10 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t11.webp" aria-label="Perbesar testimoni 11"><img src="testimoni/t11.webp" width="1012" height="1000" alt="Testimoni reseller TernakCuan 11 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t12.webp" aria-label="Perbesar testimoni 12"><img src="testimoni/t12.webp" width="1009" height="1000" alt="Testimoni reseller TernakCuan 12 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t13.webp" aria-label="Perbesar testimoni 13"><img src="testimoni/t13.webp" width="738" height="1000" alt="Testimoni reseller TernakCuan 13 via WhatsApp" decoding="async" /></button>
+<button type="button" class="testi-shot" data-full="testimoni/t14.webp" aria-label="Perbesar testimoni 14"><img src="testimoni/t14.webp" width="758" height="1000" alt="Testimoni reseller TernakCuan 14 via WhatsApp" decoding="async" /></button>
+</div>
+</div>
+<p class="tm-note">Nomor WhatsApp di screenshot sengaja diburamkan demi privasi.</p>
+
+<div class="tm-lightbox" id="tmLightbox" hidden>
+<img alt="" />
+<button type="button" class="tm-close" aria-label="Tutup">&times;</button>
+</div>
 </section>
 
 <section id="faq">
@@ -1029,5 +1006,26 @@
   })();
 </script>
 
+
+<script>
+/* Lightbox testimoni: klik screenshot untuk memperbesar */
+(function () {
+  var track = document.getElementById("marqueeTrack");
+  var box = document.getElementById("tmLightbox");
+  if (!track || !box) return;
+  var big = box.querySelector("img");
+  function closeBox() { box.hidden = true; big.removeAttribute("src"); document.body.style.overflow = ""; }
+  track.addEventListener("click", function (e) {
+    var b = e.target.closest(".testi-shot");
+    if (!b) return;
+    big.src = b.getAttribute("data-full");
+    big.alt = b.querySelector("img").alt;
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+  });
+  box.addEventListener("click", closeBox);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) closeBox(); });
+})();
+</script>
 </body>
 </html>
